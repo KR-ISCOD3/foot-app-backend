@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 connectDB();
 // Middleware
-const allowedOrigins = ["http://localhost:5174","http://localhost:5173", "https://food-project-frontend-phi.vercel.app"]; 
+const allowedOrigins = ["http://localhost:5174","http://localhost:5173", "https://food-app-rupp.vercel.app"]; 
 app.use(
   cors({
     origin: allowedOrigins,
