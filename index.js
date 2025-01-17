@@ -7,9 +7,8 @@ import authRoutes from "./routes/authRoutes.js";
 import connectDB from "./config/db.js";
 
 dotenv.config();
-
 const app = express();
-
+connectDB();
 // Middleware
 const allowedOrigins = ["http://localhost:5174","http://localhost:5173", "https://food-project-frontend-phi.vercel.app"]; 
 app.use(
@@ -21,11 +20,9 @@ app.use(
 );
 app.use(express.json());
 app.use(session(sessionConfig));
+app.use("/api/auth", authRoutes);
 
 // Routes
-app.use("/api/auth", authRoutes);
-connectDB();
-
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
