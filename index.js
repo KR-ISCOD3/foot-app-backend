@@ -14,13 +14,8 @@ const app = express();
 const allowedOrigins = ["http://localhost:5174","http://localhost:5173", "https://food-project-frontend-phi.vercel.app"]; 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
