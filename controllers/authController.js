@@ -35,12 +35,18 @@ export const login = async (req, res) => {
 
     console.log(userData);
     // Check if the user already exists in the database
-    let user = await authModel.findOne({ googleId: userData.id });
+    let user = await authModel.findOne({ email: userData.email });
 
     if (!user) {
       // If user doesn't exist, create a new one
       user = new authModel(userData);
       await user.save(); // Save the new user to the database
+    }else if (user.googleId !== userData.id) {
+      // If the user exists but has a different googleId, you can either update the user or handle the conflict
+      // Example: update the googleId and other fields
+      user.googleId = userData.id;
+      user.picture = userData.picture;
+      await user.save();
     }
     // Save user session
     req.session.user = userData;
